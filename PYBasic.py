@@ -1,0 +1,56 @@
+#BIOSTAT 821 2022 SP
+#Students: Claude Hu & Ruizhi Yuan
+
+import math
+    
+
+def get_data(inputfilename):
+    datastring = open(inputfilename, 'r').read()#read inputfile
+    lines = datastring.split('\n')#split different lines
+    result = []
+    for line in lines:
+        data = line.split(' ')#read each number in a line
+        result.append([int(num) for num in data])#turn number's string into integer
+    return(result)
+
+
+def analyze_data(data, option):
+    if option == 'average':
+        counts = 0
+        total = 0
+        for line in data:
+            for num in line:
+                counts += 1#number of samples + 1
+                total += num#the sum
+        return(total/counts)
+    elif option == 'standard deviation':
+        mean = analyze_data(data, 'average')
+        total = 0
+        counts = 0
+        for line in data:
+            for num in line:
+                counts += 1 #number of samples + 1
+                total += (num - mean) ** 2 #the sum of (x - xbar)^2
+        var = total / counts #the variance
+        return(math.sqrt(var))
+        
+    elif option == 'covariance':
+        x = data[0]
+        y = data[1]
+        xbar = analyze_data([x], 'average')
+        ybar = analyze_data([y], 'average')
+        total = 0
+        counts = len(x)
+        for i in range(len(x)):
+            total += (x[i] - xbar) * (y[i] - ybar)
+        return(total / counts)
+    elif option == 'correlation':
+        x = data[0]
+        y = data[1]
+        n = len(x)
+        cov = analyze_data(data, 'covariance')
+        sdx = analyze_data([x], 'standard deviation')
+        sdy = analyze_data([y], 'standard deviation')
+        return(cov / (sdx * sdy))
+    return
+

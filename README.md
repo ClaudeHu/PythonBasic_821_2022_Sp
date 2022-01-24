@@ -34,3 +34,12 @@ For the above example, your results should be about 21.4, 22.9, -257, and -0.594
   2. Include a link to the repository in the text of your Sakai submission.
 * You must work in group of 2 or 3 (not alone - we're practicing collaboration). We expect to see commits from each student, though you're welcome to pair-program as well.
 * You may `import math`, but no other packages, standard or otherwise.
+
+
+# Python type hints
+
+Add Python type hints to your code from the `Python "data science"` assignment. Add hints at least to all function inputs and outputs.
+
+Use `mypy` to verify that your type hints are not inconsistent with your code.
+
+Submit these changes _via a pull request_ to your existing GitHub repo. For each PR, receive a review from your partner(s).

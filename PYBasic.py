@@ -4,7 +4,7 @@
 import math
     
 
-def get_data(inputfilename):
+def get_data(inputfilename: str) -> list:
     datastring = open(inputfilename, 'r').read()#read inputfile
     lines = datastring.split('\n')#split different lines
     result = []
@@ -14,7 +14,7 @@ def get_data(inputfilename):
     return(result)
 
 
-def analyze_data(data, option):
+def analyze_data(data: list, option: str) -> float:
     if option == 'average':
         counts = 0
         total = 0
@@ -52,5 +52,16 @@ def analyze_data(data, option):
         sdx = analyze_data([x], 'standard deviation')
         sdy = analyze_data([y], 'standard deviation')
         return(cov / (sdx * sdy))
-    return
+    else:
+        return(float("-inf"))
+    
+
+inputfilename = "example.txt"
+dat = get_data(inputfilename)
+print("Mean: ", analyze_data(dat, "average"))
+print("Standard deviation: ", analyze_data(dat, "standard deviation"))
+print("Covariance: ", analyze_data(dat, "covariance"))
+print("Correlation: ", analyze_data(dat, "correlation"))
+print("Wrong input: ", analyze_data(dat, "error"))
+
 
